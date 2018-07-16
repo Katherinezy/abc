@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="GBK">
+    <title>第一个 Highcharts 图表</title>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js">
+     </script>
+     <script src="https://img.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+</head>
+<body>
+    <!-- 图表容器 DOM -->
+    <div id="container1" style="width: 600px;height:400px;"></div>
+     <div id="container2" style="min-width:400px;height:400px"></div>
+    <!-- 引入 highcharts.js -->
+    <script>
+        // 图表配置
+        var options = {
+            chart: {
+                type: 'bar'                          //指定图表的类型，默认是折线图（line）
+            },
+            title: {
+                text: '我的第一个图表'                 // 标题
+            },
+            xAxis: {
+                categories: ['苹果', '香蕉', '橙子']   // x 轴分类
+            },
+            yAxis: {
+                title: {
+                    text: '吃水果个数'                // y 轴标题
+                }
+            },
+            series: [{                              // 数据列
+                name: '小明',                        // 数据列名
+                data: [1, 0, 4]                     // 数据
+            }, {
+                name: '小红',
+                data: [5, 7, 3]
+            }]
+        };
+        // 图表初始化函数
+        var chart = Highcharts.chart('container1', options);
+    </script>
+      
+        <script>
+ var chart = null;
+$.getJSON('https://data.jianshukeji.com/jsonp?filename=json/usdeur.json&callback=?', function (data) {
+    chart = Highcharts.chart('container2', {
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: '美元兑欧元汇率走势图'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+            '鼠标拖动可以进行缩放' : '手势操作进行缩放'
+        },
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                millisecond: '%H:%M:%S.%L',
+                second: '%H:%M:%S',
+                minute: '%H:%M',
+                hour: '%H:%M',
+                day: '%m-%d',
+                week: '%m-%d',
+                month: '%Y-%m',
+                year: '%Y'
+            }
+        },
+        tooltip: {
+            dateTimeLabelFormats: {
+                millisecond: '%H:%M:%S.%L',
+                second: '%H:%M:%S',
+                minute: '%H:%M',
+                hour: '%H:%M',
+                day: '%Y-%m-%d',
+                week: '%m-%d',
+                month: '%Y-%m',
+                year: '%Y'
+            }
+        },
+        yAxis: {
+            title: {
+                text: '汇率'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[0]],
+                        [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+        series: [{
+            type: 'area',
+            name: '美元兑欧元',
+            data: data
+        }]
+    });
+});
+        </script>
+</body>
+</html>

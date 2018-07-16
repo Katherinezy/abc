@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="http://upcdn.b0.upaiyun.com/libs/jquery/jquery-2.0.2.min.js">
+</script>
+<script>
+function btnOk_click(){
+    var cityname = $("#cityname").val();
+    if(cityname==""){
+        alert("请输入城市名！");
+        $("#cityname").focus();
+        return false
+    }
+    $.ajax({
+        type: "get",
+        url: "http://v.juhe.cn/weather/index?dtype=jsor&format=1&key=63280f6cc5f8e5cd634",
+        dataType:"jsonp",
+        crossDomain: ture,
+        cache: false,
+        success: function(data,textStatus){
+        var result = re
+            alert("参数出错，请与管理员联系!");
+        }           
+    });
+}
+</script>
+</head>
+<body>
+Input cityname: <input type="text" name="firstname" id="txtUsername"><br>
+<button type="button" onclick="btnOk_click()">查询</button>
+</body>
+</html>
